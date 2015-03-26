@@ -107,6 +107,12 @@ $ _docker-compose() {
 $ alias docker-compose="_docker_compose $@"
 ```
 
+## Todo
+
+* Find a implementation with boot2docker ssh to call the docker-compose container from windows
+  * `alias docker=boot2docker ssh docker`
+  * check that you on the right share `/c/users`
+
 ## Links
 
 * https://github.com/docker/compose
