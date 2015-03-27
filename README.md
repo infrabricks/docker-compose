@@ -115,13 +115,18 @@ $ alias docker-compose="_docker_compose $@"
   * `alias docker=boot2docker ssh docker`
   * check that you on the right share `/c/users`
 
-## Links
+## Copyright and license
+
+Code and documentation copyright 2015 Peter Rossbach && bee42 solutions gmbh, <br/>
+Code and Docs released under the Apache 2.0 license.
+
+
+More details read the [project license file](https://raw.githubusercontent.com/infrabricks/docker-compose/master/LICENSE)!
+
+## Reference
 
 * https://github.com/docker/compose
 * https://docs.docker.com/compose/
 * Use old fig inside a docker container
   * https://github.com/ianblenke/docker-fig-docker
 * https://github.com/docker/compose/releases/tag/1.2.0rc2
-
-Regards
-Peter
