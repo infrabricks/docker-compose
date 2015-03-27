@@ -1,5 +1,7 @@
 # Docker-Compose for boot2docker and windows
 
+![logo](https://raw.githubusercontent.com/infrabricks/docker-compose/master/logo.png)
+
 Docker-compose is a very helpfull tool, but it isn't available for windows user and you can't directly install it on boot2docker. Very Bad!
 
 This is a tiny docker tool wrapper from docker-compose :)
