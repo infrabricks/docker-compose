@@ -88,7 +88,7 @@ DOCKER_X Variables
 $ $(boot2docker shellinit)
 # or
 $ $(docker-machine env dev)
-$ docker run -v $PWD:/$(basename $PWD) -v $DOCKER_CERT_PATH:/certs -e DOCKER_CERT_PATH=/certs -e DOCKER_HOST=$DOCKER_HOST -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY -ti --rm -w /$(basename $PWD) infrabricks/docker-compose --help
+$ docker run -v "$PWD:/$PWD" -v $DOCKER_CERT_PATH:/certs -e DOCKER_CERT_PATH=/certs -e DOCKER_HOST=$DOCKER_HOST -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY -ti --rm -w "$PWD" infrabricks/docker-compose --help
 ```
 
 set an alias
@@ -97,13 +97,12 @@ set an alias
 
 $ _docker-compose() {
   _PWD=$PWD
-  _BASENAME=$(basename $PWD)
-  docker run -v "$_PWD":"/$_BASENAME" \
+  docker run -v "$_PWD":"$_PWD" \
     -v $DOCKER_CERT_PATH:/certs \
     -e DOCKER_CERT_PATH=/certs \
     -e DOCKER_HOST=$DOCKER_HOST \
     -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY \
-    -ti --rm  -w "$_BASENAME" \
+    -ti --rm  -w "$_PWD" \
     infrabricks/docker-compose $@
 }
 $ alias docker-compose="_docker_compose $@"
@@ -119,13 +118,28 @@ $ alias docker-compose="_docker_compose $@"
 
 * [infrabricks/docker-compose](https://github.com/infrabricks/docker-compose)
 
-## Copyright and license
+## Contact
 
-Code and documentation copyright 2015 Peter Rossbach && bee42 solutions gmbh, <br/>
-Code and Docs released under the Apache 2.0 license.
+For bugs, questions, comments, corrections, suggestions, etc., open an issue in
+ [infrabricks/docker-compose](https://github.com/infrabricks/docker-compose/issues) with a title starting with `[docker-compose] `.
 
+Or just [click here](https://github.com/infrabricks/docker-compose/issues/new?title=%5Bdocker-compose%5D%20) to create a new issue.
+
+## License
+
+Copyright (c) 2014-2015 [bee42 solutions Gmbh- Peter Rossbach](http://www.bee42.com)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
 More details read the [project license file](https://raw.githubusercontent.com/infrabricks/docker-compose/master/LICENSE)!
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 ## Reference
 
