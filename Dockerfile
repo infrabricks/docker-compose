@@ -1,7 +1,7 @@
 FROM debian:8
 MAINTAINER Peter Rossbach <peter.rossbach@bee42.com> @PRossbach
 
-ENV DOCKER_COMPOSE_VERSION 1.1.1
+ENV DOCKER_COMPOSE_VERSION 1.1.0
 RUN apt-get update && apt-get install -y curl \
  && curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` >/usr/local/bin/docker-compose ; chmod +x /usr/local/bin/docker-compose \
   && apt-get clean autoclean \

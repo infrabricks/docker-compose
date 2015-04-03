@@ -1,2 +1,2 @@
 #!/bin/sh
-docker run -ti --rm -v "$PWD:/$PWD" -v /var/run/docker.sock:/var/run/docker.sock -w "$PWD") infrabricks/docker-compose $@
+docker run -ti --rm -v "$PWD:/$PWD" -v /var/run/docker.sock:/var/run/docker.sock -w "$PWD" infrabricks/docker-compose $@
