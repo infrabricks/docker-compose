@@ -4,7 +4,7 @@
 
 Docker-compose is a very helpfull tool, but it isn't available for windows user and you can't directly install it on boot2docker. Very Bad!
 
-This is a tiny docker tool wrapper from docker-compose :)
+This is a small docker tool wrapper for docker-compose :)
 
 ## install
 
@@ -114,6 +114,10 @@ $ alias docker-compose="_docker_compose $@"
 * Find a implementation with boot2docker ssh to call the docker-compose container from windows
   * `alias docker=boot2docker ssh docker`
   * check that you on the right share `/c/users`
+
+## Source code
+
+* [infrabricks/docker-compose](https://github.com/infrabricks/docker-compose)
 
 ## Copyright and license
 
