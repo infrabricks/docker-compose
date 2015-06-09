@@ -147,4 +147,4 @@ limitations under the License.
 * https://docs.docker.com/compose/
 * Use old fig inside a docker container
   * https://github.com/ianblenke/docker-fig-docker
-* https://github.com/docker/compose/releases/tag/1.2.0rc2
+* https://github.com/docker/compose/releases/tag/1.2.0
