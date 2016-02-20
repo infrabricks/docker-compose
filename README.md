@@ -88,7 +88,12 @@ DOCKER_X Variables
 $ $(boot2docker shellinit)
 # or
 $ $(docker-machine env dev)
-$ docker run -v "$PWD:/$PWD" -v $DOCKER_CERT_PATH:/certs -e DOCKER_CERT_PATH=/certs -e DOCKER_HOST=$DOCKER_HOST -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY -ti --rm -w "$PWD" infrabricks/docker-compose --help
+$ docker run -v "$PWD:/$PWD" -v $DOCKER_CERT_PATH:/certs \
+ -e DOCKER_CERT_PATH=/certs \
+ -e DOCKER_HOST=$DOCKER_HOST \
+ -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY \
+ -ti --rm -w "$PWD" \
+ infrabricks/docker-compose --help
 ```
 
 set an alias
@@ -148,3 +153,4 @@ limitations under the License.
 * Use old fig inside a docker container
   * https://github.com/ianblenke/docker-fig-docker
 * https://github.com/docker/compose/releases/tag/1.2.0
+* https://github.com/docker/compose/releases/tag/1.3.0rc1
