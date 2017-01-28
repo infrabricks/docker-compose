@@ -1,26 +1,15 @@
-# Docker-Compose for boot2docker and windows
+# Docker-Compose inside a container
+
+[![](https://images.microbadger.com/badges/image/infrabricks/docker-compose:alpine.svg)](http://microbadger.com/images/infrabricks/docker-compose "Get your own image badge on microbadger.com")
 
 ![logo](https://raw.githubusercontent.com/infrabricks/docker-compose/master/logo.png)
-
-Docker-compose is a very helpfull tool, but it isn't available for windows user and you can't directly install it on boot2docker. Very Bad!
 
 This is a small docker tool wrapper for docker-compose :)
 
 ## install
 
-### windows
-
-At windows install the docker client
-from source or master:
-
-* https://ahmetalpbalkan.com/blog/compiling-docker-cli-on-windows/
-* https://master.dockerproject.com/windows/amd64/docker.exe
-
-install the docker-compose script and image to your
-
 ```
-$ git clone https://github.com/infrabricks/infrabricks-line
-$ cd utils/docker/docker-compose
+$ git clone https://github.com/infrabricks/docker-compose
 $ docker build -t infrabricks/docker-compose .
 # or
 $ docker pull infrabricks/docker-compose
@@ -30,11 +19,10 @@ $ docker run --rm -v $(pwd):/data --entrypoint=/scripts/install infrabricks/dock
 
 Move `docker-compose` script to standard directory at your `PATH`.
 
-### boot2docker
+## build
 
 ```
-$ git clone https://github.com/infrabricks/infrabricks-line
-$ cd utils/docker/docker-compose
+$ git clone https://github.com/infrabricks/docker-compose
 $ docker build -t infrabricks/docker-compose .
 # or
 $ docker pull infrabricks/docker-compose
@@ -85,8 +73,6 @@ Access a external server with docker-compose set the
 DOCKER_X Variables
 
 ```
-$ $(boot2docker shellinit)
-# or
 $ $(docker-machine env dev)
 $ docker run -v "$PWD:/$PWD" -v $DOCKER_CERT_PATH:/certs \
  -e DOCKER_CERT_PATH=/certs \
@@ -113,11 +99,50 @@ $ _docker-compose() {
 $ alias docker-compose="_docker_compose $@"
 ```
 
-## Todo
+At linux normal user use this alias with correct user and group mapping
 
-* Find a implementation with boot2docker ssh to call the docker-compose container from windows
-  * `alias docker=boot2docker ssh docker`
-  * check that you on the right share `/c/users`
+```bash
+$ _docker-compose () {
+  DIRNAME=$"$(basename \"$PWD\")"
+  docker run --rm -it \
+    -e LOCAL_USER_ID=\`id -u \$USER\`  \
+    -e LOCAL_USER_GROUP_ID=\`id -g \$USER\` \
+    -e LOCAL_USER_GROUP_NAME=\`id -gn \$USER\` \
+    --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    -v "$DIRNAME":"$DIRNAME":ro \
+    -w "$DIRNAME" \
+    infrabricks/docker-compose:alpine \
+    docker-compose "$@"
+}
+$ alias docker-compose="_docker_compose $@"
+```
+
+## Building other versions
+
+If you want build a specific version of [Docker Compose](https://docs.docker.com/compose/) build your own by the following example.
+
+```bash
+$ docker build -f Dockerfile.alpine  \
+ --build-arg DOCKER_COMPOSE_VERSION=1.9 \
+ -t infrabricks/docker-compose:alpine-1.9 .
+```
+
+- If you don't set --build-arg it docker-compose `1.10` will be used.
+
+Other build args
+
+| Build ARG                | Default Value |
+|:-------------------------|:--------------|
+| `DOCKER_COMPOSE_VERSION` | `1.10`        |
+| `GOSU_VERSION`           | `1.10`        |
+| `GLIBC_VERSION`          | `2.23-r3`     |
+
+## labels
+
+We add some lables
+
+* http://label-schema.org/rc1/
 
 ## Source code
 
@@ -132,7 +157,7 @@ Or just [click here](https://github.com/infrabricks/docker-compose/issues/new?ti
 
 ## License
 
-Copyright (c) 2014-2015 [bee42 solutions Gmbh- Peter Rossbach](http://www.bee42.com)
+Copyright (c) 2014-2017 [bee42 solutions Gmbh- Peter Rossbach](https://bee42.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -154,3 +179,4 @@ limitations under the License.
   * https://github.com/ianblenke/docker-fig-docker
 * https://github.com/docker/compose/releases/tag/1.2.0
 * https://github.com/docker/compose/releases/tag/1.3.0rc1
+* https://github.com/wernight/docker-compose
